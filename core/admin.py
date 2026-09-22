@@ -22,18 +22,18 @@ class CompraAdmin(ModelAdmin):
         """Exibe R$ 123,45 em vez de 123.45."""
         return f"R$ {obj.total:.2f}"
 
-    list_display = ('usuario', 'status', 'total_formatado', 'data')  # mostra na listagem
-    ordering = ('usuario', 'status', 'data')  # ordena por esses campos
+    list_display = ('usuario', 'status', 'total_formatado', 'data_criacao', 'data_atualizacao')  # mostra na listagem
+    ordering = ('usuario', 'status', 'data_criacao')  # ordena por esses campos
     search_fields = ('usuario__email', 'status')  # campos pesquisáveis
-    list_filter = ('status', 'data')  # filtros laterais
+    list_filter = ('status', 'data_criacao')  # filtros laterais
     list_per_page = 10
     inlines = [ItensCompraInline]
-    readonly_fields = ('data', 'total_formatado',)  # campos somente leitura
+    readonly_fields = ('data_criacao', 'data_atualizacao', 'total_formatado')  # campos somente leitura
 
 
 @register(Autor)
 class AutorAdmin(ModelAdmin):
-    list_display = ('nome', 'email')
+    list_display = ('nome', 'email',)
     search_fields = ('nome', 'email')
     list_filter = ('nome',)
     ordering = ('nome', 'email')
