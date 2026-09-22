@@ -12,6 +12,7 @@ class Compra(models.Model):
 
     usuario = models.ForeignKey(User, on_delete=models.PROTECT, related_name='compras')
     status = models.IntegerField(choices=StatusCompra.choices,  default=StatusCompra.CARRINHO)
+    data = models.DateTimeField(auto_now_add=True)
 
     @property
     def total(self):
@@ -22,3 +23,4 @@ class ItensCompra(models.Model):
     livro = models.ForeignKey(Livro, on_delete=models.PROTECT, related_name='+')
     quantidade = models.IntegerField(default=1)
     preco = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+ 
