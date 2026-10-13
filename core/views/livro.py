@@ -4,6 +4,9 @@ from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
+
 
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
@@ -25,8 +28,9 @@ class LivroViewSet(ModelViewSet):
     queryset = Livro.objects.all()
     serializer_class = LivroSerializer
 
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['categoria__descricao', 'editora__nome']  # Campos para filtragem
+    filter_backends = [DjangoFilterBackend, SearchFilter]  # Adicionando SearchFilter
+    filterset_fields = ['categoria__descricao', 'editora__nome']  # Campos para filtro
+    search_fields = ['titulo']  # Campos para busca textual
 
     def get_serializer_class(self):
         if self.action == 'list':
