@@ -50,4 +50,11 @@ class LivroSerializer(ModelSerializer):
         model = Livro
         fields = '__all__'
 
+class LivroMaisVendidoSerializer(ModelSerializer):
+    total_vendidos = IntegerField()
+
+    class Meta:
+        model = Livro
+        fields = ('id', 'titulo', 'total_vendidos')
+
 
